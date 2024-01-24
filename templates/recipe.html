@@ -1,0 +1,47 @@
+{% extends "layout_recipe.html" %}
+
+{% block title %}
+    {{ name }}
+{% endblock %}
+
+{% block main %}
+<main class="row">
+    <div class="col col-lg-9">
+        <div class="container py-5" style="padding-left:250px">
+            <form action="/recipes/{{ url }}" method="post">
+                <div class="row mb-3 justify-content-left">
+                    <div class="col col-lg-3">
+                        <p style="font-size: 12px;; text-align: left">Recipe</p>
+                        <h3>{{ name }}</h3>
+                    </div>
+                    <a class="col col-lg-1 orange-link" style="background:none; border: 0px; text-align: left; padding-top: 45px" href="/recipes/{{ url }}/edit">Edit</a>
+                    <button class="col col-lg-1" style="background:none; border: 0px; text-align: left; padding-top: 27px" type="submit"><a class="green-link">Delete</a></button>
+                </div>
+            </form>
+
+            <p style="text-align: left"><b>Servings: </b>{{ servings }}</p>
+            <p style="text-align: left"><b>Time: </b>{{ time }}</p>
+            <div class="row mb-3 justify-content-left">
+                <img src="{{ image }}" class="recipe-image">
+            </div>
+
+            <h3 style="margin-bottom: 20px">Method</h3>
+            <div class="col col-lg-9">
+                <p class="paragraph">{{ method }}</p>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <div class="col" style="background-color: #FFEDCB; padding: 30px">
+        <div class="container py-5">
+            <h3 style="margin-bottom: 40px">Ingredients</h3>
+            {% for ingredient in ingredients %}
+                <p style="text-align: left"><b>{{ ingredient.amount }} {{ ingredient.units }}</b> {{ ingredient.name }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

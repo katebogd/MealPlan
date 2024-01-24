@@ -1,0 +1,61 @@
+{% extends "layout_recipe.html" %}
+
+{% block title %}
+    {{ name }}
+{% endblock %}
+
+{% block main %}
+<main class="row">
+    <div class="col col-lg-9">
+        <div class="container py-5" style="padding-left:250px">
+            <form action="/plans/{{ url }}" method="post">
+                <div class="row mb-3 justify-content-left">
+                    <div class="col col-lg-3">
+                        <p style="font-size: 12px;; text-align: left">Plan</p>
+                        <h3>{{ name }}</h3>
+                    </div>
+                    <a class="col col-lg-1 orange-link" style="background:none; border: 0px; text-align: left; padding-top: 45px" href="/plans/{{ url }}/edit">Edit</a>
+                    <span class="col col-lg-1"></span>
+                    <button class="col col-lg-1" style="background:none; border: 0px; text-align: left; padding-top: 27px" type="submit"><a class="green-link">Delete</a></button>
+                </div>
+            </form>
+
+            <p style="text-align: left"><b>Days: </b>{{ days }}</p>
+            <p style="text-align: left"><b>People: </b>{{ people }}</p>
+            <br>
+            <div class="row mb-3 justify-content-left">
+                <h3 class="col col-lg-3">Recipes</h3>
+            </div>
+            <div class="row mb-3 row-cols-1 row-cols-md-2 g-4 justify-content-left">
+                {% for recipe in recipes %}
+                    <div class="col col-lg-4"  style = "margin-bottom: 50px;">
+                        <a href="/recipes/{{ recipe.url }}">
+                            <div class="card h-100">
+                            <img src="{{ recipe.image }}" class="card-img-top">
+                                <div class="card-body">
+                                    <input class="card-title" id="recipe_name" name="recipe_name" value="{{ recipe.name }}" readonly>
+                                    <p class="card-text"><b>Servings: </b>{{ recipe.servings }}</p>
+                                    <p class="card-text"><b>Time: </b>{{ recipe.time }}</p>
+                                    <p class="card-text"><b>Portions: </b>{{ recipe.portions }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <div class="col" style="background-color: #FFEDCB; padding: 30px">
+        <div class="container py-5">
+            <h3 style="margin-bottom: 40px">Grocery List</h3>
+            {% for ingredient in ingredients %}
+                <p style="text-align: left"><b>{{ ingredient.amount }} {{ ingredient.units }}</b> {{ ingredient.name }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

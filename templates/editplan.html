@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Plan
+{% endblock %}
+
+{% block main %}
+    <div class="row mb-3 justify-content-left">
+        <h3 class="col col-lg-3">Edit Plan</h3>
+    </div>
+
+    <form action="/plans/{{ url }}/edit" method="post">
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">Name</label>
+            <div class="col-sm-5">
+                <input autocomplete="off" autofocus class="form-control mx-auto" id="plan_name" name="plan_name" value="{{ name }}" type="text">
+            </div>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">Days</label>
+            <div class="col-sm-3">
+                <input autocomplete="off" class="form-control mx-auto" id="days" name="days" value="{{ days }}" type="text">
+            </div>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">People</label>
+            <div class="col-sm-3">
+                <input autocomplete="off" class="form-control mx-auto" id="people" name="people" value="{{ people }}" type="text">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row mb-3 justify-content-left">
+            <h3 class="col col-lg-3">Add Recipes</h3>
+        </div>
+        <div class="row mb-3 row-cols-1 row-cols-md-2 g-4 justify-content-left">
+            {% for recipe in recipes %}
+                <div class="col col-lg-3"  style = "margin-bottom: 50px;">
+                    <div class="card h-100">
+                        <img src="{{ recipe.image }}" class="card-img-top">
+                        <div class="card-body">
+                            <input class="card-title" id="recipe_name" name="recipe_name" value="{{ recipe.name }}" readonly>
+                            <p class="card-text"><b>Servings: </b>{{ recipe.servings }}</p>
+                            <p class="card-text"><b>Time: </b>{{ recipe.time }}</p>
+                            <div class="row mb-3 justify-content-left">
+                                <p class="col-sm-5 card-text" style="line-height:50px"><b>Portions</b></p>
+                                <div class="col-sm-4">
+                                    <input autocomplete="off" class="form-control mx-auto" id="portions" name="portions" value="{{ recipe.portions }}" type="text">
+                                </div>
+                            </div>
+                            <input onclick="recipeAdd(this)" type="text" class="btn btn-primary col col-lg-9 {{ recipe.button_class }}" id="addThisRecipe" name="addThisRecipe" value="{{ recipe.added }}">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row mb-3 justify-content-left">
+            <button class="btn btn-primary col col-lg-4 orange" type="submit">Save</button>
+        </div>
+    </form>
+
+{% endblock %}

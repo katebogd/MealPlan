@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Recipe
+{% endblock %}
+
+{% block main %}
+
+    <div class="row mb-3 justify-content-left">
+        <h3 class="col col-lg-3">Edit Recipe</h3>
+    </div>
+
+    <form action="/recipes/{{ url }}/edit" method="post">
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">Name</label>
+            <div class="col-sm-5">
+                <input autocomplete="off" autofocus class="form-control mx-auto" id="recipe_name" name="recipe_name" value="{{ name }}" type="text">
+            </div>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">Servings</label>
+            <div class="col-sm-3">
+                <input autocomplete="off" class="form-control mx-auto" id="servings" name="servings" value="{{ servings }}" type="text">
+            </div>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">Time</label>
+            <div class="col-sm-3">
+                <input autocomplete="off" class="form-control mx-auto" id="time" name="time" value="{{ time }}" type="text">
+            </div>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <label class="col-sm-2 col-form-label small-label">Image Link</label>
+            <div class="col-sm-5">
+                <input autocomplete="off" class="form-control mx-auto" id="img" name="img" value ="{{ image }}" type="text">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row mb-3 justify-content-left">
+            <h3 class="col col-lg-3">Ingredients</h3>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <p class="col-sm-2 title">Amount</label>
+            <p class="col-sm-2 title">Units</label>
+            <p class="col-sm-5 title">Name</label>
+        </div>
+        <table class="container py-5" id="ingredients">
+            {% for ingredient in ingredients %}
+                <tr class="row mb-3 justify-content-left" id="ingredient-line">
+                    <td class="col-sm-2">
+                        <input autocomplete="off" class="form-control mx-auto" id="ingredient_amount" name="amount" value="{{ ingredient.amount }}" type="text">
+                    </td>
+                    <td class="col-sm-2">
+                        <select autocomplete="off" class="form-select mx-auto" id="ingredient_units" name="units">
+                            <option value="{{ ingredient.units }}" selected hidden>{{ ingredient.units }}</option>
+                            <option value="cups">cups</option>
+                            <option value="tbsp">tbsp</option>
+                            <option value="tsp">tsp</option>
+                            <option value="gramms">gramms</option>
+                            <option value="units">units</option>
+                        </select>
+                    </td>
+                    <td class="col-sm-5">
+                        <input autocomplete="off" class="form-control mx-auto" id="ingredient_name" name="ingredient_name" value="{{ ingredient.name }}" type="text">
+                    </td>
+                    <td class="col-sm-1">
+                        <a class="bi bi-trash3 orange-link large_text" id="removeIngredients" onclick="removeIngredient(this, 'ingredients')"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="row mb-3 justify-content-left">
+            <input type="button" class="btn btn-primary col col-lg-3 button-green" id="addIngredients" onclick="addField('ingredient-line','ingredients')" value="+ Add More Ingredients">
+        </div>
+
+        <br>
+
+        <div class="row mb-3 justify-content-left">
+            <h3 class="col col-lg-3">Method</h3>
+        </div>
+        <div class="row mb-3 justify-content-left">
+            <textarea autocomplete="off" class="form-control mx-auto large-input" id="autoresizing" name="method" type="text" wrap="soft" rows ="10">{{ method }}</textarea>
+        </div>
+
+        <div class="row mb-3 justify-content-left">
+            <button class="btn btn-primary col col-lg-4 orange" type="submit">Save</button>
+        </div>
+    </form>
+{% endblock %}

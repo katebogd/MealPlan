@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <div class="row p-3 mb-3">
+        <h3>Create Recipe</h3>
+    </div>
+
+    <div class="mb-3">
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Transaction</th>
+                <th scope="col">Price</th>
+                <th scope="col">Shares</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <th style = "text-align:left" scope="row">{{ transaction.time }}</th>
+                        <td>{{ transaction.stock }}</td>
+                        <td>{{ transaction.type }}</td>
+                        <td>{{ transaction.price }}</td>
+                        <td>{{ transaction.shares }}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+    </div>
+{% endblock %}

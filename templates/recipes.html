@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All Recipes
+{% endblock %}
+
+{% block main %}
+    <div class="row mb-3 justify-content-left">
+        <div class="col col-lg-3">
+            <h3>My Recipes</h3>
+            <p style="line-height: 50px; text-align: left"><b>Total: </b>{{ total }} recipes</p>
+        </div>
+<!--        <div class="col col-lg-2">
+            <a href="/addrecipe">
+                <button class="btn btn-primary col col-lg-12 green large">+ Add Recipe</button>
+            </a>
+        </div> -->
+        <div class="col col-lg-2">
+            <a href="/createrecipe">
+                <button class="btn btn-primary col col-lg-12 orange large">+ Create Recipe</button>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="row mb-3 row-cols-1 row-cols-md-2 g-4 justify-content-left">
+        {% for recipe in recipes %}
+            <div class="col col-lg-3" style = "margin-bottom: 50px;">
+                <a href="/recipes/{{ recipe.url }}">
+                    <div class="card h-100">
+                        <img src="{{ recipe.image }}" class="card-img-top">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ recipe.name }}</h5>
+                        <p class="card-text"><b>Servings: </b>{{ recipe.servings }}</p>
+                        <p class="card-text"><b>Time: </b>{{ recipe.time }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

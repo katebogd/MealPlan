@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All Plans
+{% endblock %}
+
+{% block main %}
+<div class="row mb-3 justify-content-left">
+    <div class="col col-lg-3">
+        <h3>My Plans</h3>
+        <p style="line-height: 50px; text-align: left"><b>Total: </b>{{ total }} plans</p>
+    </div>
+    <div class="col col-lg-2">
+        <a href="/createplan">
+            <button class="btn btn-primary col col-lg-12 orange large">+ Create Plan</button>
+        </a>
+    </div>
+</div>
+
+
+<div class="row mb-3 justify-content-left">
+    {% for plan in plans %}
+        <div class="col col-lg-3">
+            <a href="/plans/{{ plan.url }}">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <br>
+                        <h5 class="card-title">{{ plan.name }}</h5>
+                        <p class="card-text"><b>Days: </b>{{ plan.days }}</p>
+                        <p class="card-text"><b>People: </b>{{ plan.people }}</p>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

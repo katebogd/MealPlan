@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div class="row mb-3 justify-content-left">
+        <h3 class="col col-lg-3">My Plans</h3>
+        <p class="col col-lg-2" style="line-height: 50px; text-align: left"><a class="orange-link" href="/plans">See All</a></p>
+    </div>
+
+    <div class="row mb-3 row-cols-4 justify-content-left">
+        <div class="col col-lg-3" style="padding: 80px 0">
+            <a href="/createplan">
+                <button class="btn btn-primary col col-lg-9 green large">+ Create Plan</button>
+            </a>
+        </div>
+        {% for plan in plans %}
+            <div class="col col-lg-3"  style = "margin-bottom: 50px;">
+                <a href="/plans/{{ plan.url }}">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <br>
+                            <h5 class="card-title">{{ plan.name }}</h5>
+                            <p class="card-text"><b>Days: </b>{{ plan.days }}</p>
+                            <p class="card-text"><b>People: </b>{{ plan.people }}</p>
+                            <br>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+    <div class="row mb-3 justify-content-left">
+        <h3 class="col col-lg-3">My Recipes</h3>
+        <p class="col col-lg-2" style="line-height: 50px; text-align: left"><a class="orange-link" href="/recipes">See All</a></p>
+    </div>
+
+    <div class="row mb-3 row-cols-1 row-cols-md-2 g-4 justify-content-left">
+        <div class="col col-lg-3" style="padding: 60px 0">
+<!--            <a href="/addrecipe">
+                <button class="btn btn-primary col col-lg-9 green large">+ Add Recipe</button>
+            </a> -->
+            <a href="/createrecipe">
+                <button class="btn btn-primary col col-lg-9 orange large">+ Create Recipe</button>
+            </a>
+        </div>
+        {% for recipe in recipes %}
+            <div class="col col-lg-3"  style = "margin-bottom: 50px;">
+                <a href="/recipes/{{ recipe.url }}">
+                    <div class="card h-100">
+                        <img src="{{ recipe.image }}" class="card-img-top">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ recipe.name }}</h5>
+                        <p class="card-text"><b>Servings: </b>{{ recipe.servings }}</p>
+                        <p class="card-text"><b>Time: </b>{{ recipe.time }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <br>
+
+{% endblock %}
