@@ -13,5 +13,11 @@ class SQL:
                 self._filename.replace("sqlite:///", "")))
         cursor = connection.cursor()
         cursor.execute(statement, args)
-        return cursor.fetchall()
+        result = []
+        for row in cursor:
+            d = {}
+            for idx, col in enumerate(cursor.description):
+                d[col[0]] = row[idx]
+            result.append(d)
+        return result
 
