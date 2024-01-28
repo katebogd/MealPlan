@@ -13,5 +13,5 @@ class SQL:
                 self._filename.replace("sqlite:///", "")))
         cursor = connection.cursor()
         cursor.execute(statement, args)
-        return self.cursor.fetchall()
+        return cursor.fetchall()
 
