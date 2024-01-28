@@ -8,6 +8,6 @@ class SQL:
         self._cursor = self._connection.cursor()
 
     def execute(self, statement, *args):
-        self._cursor.execute(statement, *args)
+        self._cursor.execute(statement, args)
         return self.cursor.fetchall()
 
