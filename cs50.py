@@ -1,6 +1,8 @@
 import sqlite3
 import os
 
+environment = "DEV"
+
 class SQL:
     def __init__(self, filename):
         self._filename = filename
@@ -19,5 +21,9 @@ class SQL:
             for idx, col in enumerate(cursor.description):
                 d[col[0]] = row[idx]
             result.append(d)
+        try:
+            database.commit()
+        except:
+            pass
         return result
 
