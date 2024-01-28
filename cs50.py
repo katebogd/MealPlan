@@ -21,9 +21,6 @@ class SQL:
             for idx, col in enumerate(cursor.description):
                 d[col[0]] = row[idx]
             result.append(d)
-        try:
-            database.commit()
-        except:
-            pass
+        connection.commit()
         return result
 
