@@ -170,11 +170,16 @@ def createrecipe():
 
         # Ensure dnumber of servings was submitted
         elif not request.form.get("servings"):
-            return apology("must provide num,ebr of servings", 400)
+            return apology("must provide number of servings", 400)
+        
 
         # Add recipe to database
         recipe_name = request.form.get("recipe_name")
         servings = request.form.get("servings")
+        try:
+            servings = int(servings)
+        except:
+            return apology("must provide an integer for servings", 400)
         recipe_time = request.form.get("time")
         method = request.form.get("method")
         image = request.form.get("img")
@@ -186,6 +191,10 @@ def createrecipe():
 
         recipe_id = db.execute("SELECT id FROM recipes WHERE name = ?",recipe_name)
         for amount, units, ingredient in zip(request.form.getlist('amount'), request.form.getlist('units'), request.form.getlist('ingredient_name')):
+            try:
+                amount = float(amount)
+            except:
+                return apology("must provide a number for ingredient amount", 400)
             db.execute("INSERT INTO ingredients (name, recipe_id, amount, unit) VALUES (?, ?, ?, ?)", ingredient, recipe_id[0]["id"], amount, units)
 
         return redirect("/recipes")
