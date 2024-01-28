@@ -11,7 +11,7 @@ from helpers import apology, login_required, create_url, is_ingredient_in_list, 
 
 # Configure application
 app = Flask(__name__)
-
+app.config["SESSION_FILE_DIR"] = "/www_data/"
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
